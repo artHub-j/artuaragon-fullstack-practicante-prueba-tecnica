@@ -9,3 +9,6 @@ npm start
 ```
 
 ## Ejercicio 2: Lógica y Algoritmos
+
+
+### Contacto: artuaragon@gmail.com
