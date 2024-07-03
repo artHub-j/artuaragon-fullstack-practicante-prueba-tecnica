@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; // Importar Bootstrap Icons
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Modal, Button } from "react-bootstrap";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
   const [newTask, setNewTask] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // Guardar tareas y tema en localStorage cada vez que cambien
   useEffect(() => {
@@ -26,7 +28,11 @@ function App() {
 
   const handleDeleteTasks = () => {
     setTasks([]);
+    setShowConfirm(false);
   };
+
+  const handleShowConfirm = () => setShowConfirm(true);
+  const handleCloseConfirm = () => setShowConfirm(false);
 
   return (
     <div className="container mt-5">
@@ -56,11 +62,28 @@ function App() {
               </li>
             ))}
           </ul>
-          <button className="btn btn-danger mt-3" onClick={handleDeleteTasks}>
+          <button className="btn btn-danger mt-3" onClick={handleShowConfirm}>
             Eliminar todas las tareas
           </button>
         </div>
       </div>
+
+      <Modal show={showConfirm} onHide={handleCloseConfirm}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estas seguro de que quieres eliminar todas las tareas?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseConfirm}>
+            No
+          </Button>
+          <Button variant="danger" onClick={handleDeleteTasks}>
+            Si
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
