@@ -26,6 +26,10 @@ function App() {
     }
   };
 
+  const handleDeleteTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
   const handleDeleteTasks = () => {
     setTasks([]);
     setShowConfirm(false);
@@ -57,8 +61,17 @@ function App() {
           </form>
           <ul className="list-group">
             {tasks.map((task, index) => (
-              <li key={index} className="list-group-item">
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
                 {task}
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => handleDeleteTask(index)}
+                >
+                  <i className="bi bi-trash"></i>
+                </button>
               </li>
             ))}
           </ul>
