@@ -24,6 +24,10 @@ function App() {
     }
   };
 
+  const handleDeleteTasks = () => {
+    setTasks([]);
+  };
+
   return (
     <div className="container mt-5">
       <div className="card">
@@ -52,6 +56,9 @@ function App() {
               </li>
             ))}
           </ul>
+          <button className="btn btn-danger mt-3" onClick={handleDeleteTasks}>
+            Eliminar todas las tareas
+          </button>
         </div>
       </div>
     </div>
